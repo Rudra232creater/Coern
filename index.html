@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coern - Play to Earn 2X Rewards</title>
+    <style>
+        /* Modern gradient background */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            color: white;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .highlight {
+            background-color: #FFD700;
+            color: #6e48aa;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .countdown {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            font-weight: bold;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .game-modes {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .game-mode {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            width: 28%;
+            min-width: 200px;
+            margin: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .testimonial {
+            font-style: italic;
+            margin: 30px auto;
+            max-width: 600px;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .testimonial:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            left: 10px;
+            top: -20px;
+            opacity: 0.2;
+        }
+        
+        .download-btn {
+            background: #FFD700;
+            color: #6e48aa;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .bonus-box {
+            background: rgba(255,215,0,0.2);
+            border: 2px dashed #FFD700;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .game-mode {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚨 Early Players Earn <span class="highlight">2X Rewards</span> This Week!</h1>
+        
+        <p>Be among the <span class="highlight">first 10K players</span> to unlock double coin rewards for 7 days.</p>
+        <p><em>Offer ends soon—every tap counts extra!</em></p>
+        
+        <div class="countdown" id="countdown">
+            Time left: 23:59:59
+        </div>
+        
+        <button class="download-btn" onclick="downloadNow()">
+            ⬇ Download Now & Claim 2X Bonus
+        </button>
+        
+        <div class="bonus-box">
+            <h3>✨ Why Join Now?</h3>
+            <p>✔ <strong>2X earnings</strong> on all games (limited time)</p>
+            <p>✔ <strong>Priority support</strong> for early adopters</p>
+            <p>✔ <strong>Exclusive NFT rewards</strong> for top 100 players</p>
+        </div>
+        
+        <div class="testimonial">
+            "I cashed out ₹500 in just 1 hour! Coern is literally paying my bills now." 
+            <br>- @Rahul_CoernMaster
+        </div>
+        
+        <div class="game-modes">
+            <div class="game-mode">
+                <h3>🟣 Tap the Cat</h3>
+                <p>Lightning-fast taps = instant coins. <br><em>(Warning: Highly addictive.)</em></p>
+            </div>
+            
+            <div class="game-mode">
+                <h3>🟢 Endless Runner</h3>
+                <p>Dodge, collect, and cash out. <br>How far can you go?</p>
+            </div>
+            
+            <div class="game-mode">
+                <h3>🔵 Brain Puzzle</h3>
+                <p>Outsmart challenges. <br>Earn while you flex your brain.</p>
+            </div>
+        </div>
+        
+        <p><strong>Later = fewer bonuses.</strong> Your future self will thank you.</p>
+        
+        <button class="download-btn" onclick="downloadNow()">
+            ⬇ Download Before Midnight!
+        </button>
+    </div>
+
+    <script>
+        // Countdown timer (24 hours from now)
+        function updateCountdown() {
+            const now = new Date();
+            const midnight = new Date();
+            midnight.setHours(24, 0, 0, 0);
+            
+            const diff = midnight - now;
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').innerHTML = 
+                `Time left: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Update every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+        
+        // Download button action
+        function downloadNow() {
+            // Replace with actual download link
+            alert("Redirecting to download... (This would link to your app store/page)");
+            // window.location.href = "https://your-download-link.com";
+        }
+        
+        // Bonus: Animate the download button on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.querySelector('.download-btn');
+            setTimeout(() => {
+                btn.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 300);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
