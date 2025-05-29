@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coern | Play-to-Earn Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #00cec9;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .user-wallet {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .balance-card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .coin-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+        
+        /* Mining Section */
+        .mining-section {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .mining-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            padding: 30px;
+            color: white;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .mining-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .mine-button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .mine-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 206, 201, 0.3);
+        }
+        
+        /* Upgrades Section */
+        .upgrades-section {
+            margin-top: 30px;
+        }
+        
+        .upgrades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .upgrade-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .upgrade-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.1);
+        }
+        
+        .upgrade-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .upgrade-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .upgrade-price {
+            color: var(--primary);
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .buy-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .buy-button:hover {
+            opacity: 0.9;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .referral-card, .rewards-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        
+        .referral-code {
+            background: var(--light);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .claim-button {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-wallet {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <div class="logo">COERN</div>
+            <div class="user-wallet">
+                <div class="balance-card">
+                    <div class="coin-icon">C</div>
+                    <span id="user-balance">12,450.75</span>
+                </div>
+                <div class="balance-card">
+                    <div class="coin-icon" style="background-color: var(--success);">$</div>
+                    <span id="usd-value">$124.51</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="main-content">
+                <div class="mining-section">
+                    <h2 class="section-title">Mining Station</h2>
+                    <div class="mining-card">
+                        <div class="mining-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="mining-power">5.2</div>
+                                <div class="stat-label">Power</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="next-mine">0:14</div>
+                                <div class="stat-label">Cooldown</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="lifetime">24,560</div>
+                                <div class="stat-label">Total Mined</div>
+                            </div>
+                        </div>
+                        <button class="mine-button" id="mine-btn">MINE NOW</button>
+                    </div>
+                </div>
+                
+                <div class="upgrades-section">
+                    <h2 class="section-title">Upgrades</h2>
+                    <div class="upgrades-grid" id="upgrades-grid">
+                        <!-- Upgrades will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="referral-card">
+                    <h2 class="section-title">Referral Program</h2>
+                    <p>Invite friends and earn 10% of their mining rewards!</p>
+                    <div class="referral-code">COERN-7X9P2</div>
+                    <button class="claim-button">COPY LINK</button>
+                    <div style="margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Referrals:</span>
+                            <span id="referral-count">8</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                            <span>Earned:</span>
+                            <span id="referral-earnings">1,240 C</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rewards-card">
+                    <h2 class="section-title">Daily Rewards</h2>
+                    <p>Claim your daily bonus - increases every day!</p>
+                    <button class="claim-button" id="claim-btn">CLAIM 250 C</button>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <span>3-day streak</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample upgrades data
+        const upgrades = [
+            { id: 1, name: "Better Pickaxe", icon: "⛏️", price: 1000, power: 0.5 },
+            { id: 2, name: "Mining Bot", icon: "🤖", price: 5000, power: 2.5 },
+            { id: 3, name: "Coern Boost", icon: "⚡", price: 15000, power: 5 },
+            { id: 4, name: "Quantum Miner", icon: "🔮", price: 50000, power: 15 }
+        ];
+        
+        // Load upgrades
+        const upgradesGrid = document.getElementById('upgrades-grid');
+        upgrades.forEach(upgrade => {
+            const card = document.createElement('div');
+            card.className = 'upgrade-card';
+            card.innerHTML = `
+                <div class="upgrade-icon">${upgrade.icon}</div>
+                <div class="upgrade-name">${upgrade.name}</div>
+                <div class="upgrade-price">${upgrade.price.toLocaleString()} C</div>
+                <div>+${upgrade.power} mining power</div>
+                <button class="buy-button" data-id="${upgrade.id}">BUY</button>
+            `;
+            upgradesGrid.appendChild(card);
+        });
+        
+        // Mine button functionality
+        const mineBtn = document.getElementById('mine-btn');
+        mineBtn.addEventListener('click', () => {
+            mineBtn.disabled = true;
+            mineBtn.textContent = 'MINING...';
+            
+            // Simulate mining delay
+            setTimeout(() => {
+                // Update balance (in a real app, this would come from backend)
+                const currentBalance = parseFloat(document.getElementById('user-balance').textContent.replace(/,/g, ''));
+                const miningPower = parseFloat(document.getElementById('mining-power').textContent);
+                const newBalance = currentBalance + miningPower;
+                
+                document.getElementById('user-balance').textContent = newBalance.toLocaleString(undefined, {maximumFractionDigits: 2});
+                document.getElementById('usd-value').textContent = `$${(newBalance * 0.01).toLocaleString(undefined, {maximumFractionDigits: 2})`;
+                
+                // Reset button
+                mineBtn.disabled = false;
+                mineBtn.textContent = 'MINE NOW';
+                
+                // Start cooldown timer
+                startCooldown(30);
+            }, 1000);
+        });
+        
+        // Cooldown timer
+        function startCooldown(seconds) {
+            const timerElement = document.getElementById('next-mine');
+            mineBtn.disabled = true;
+            
+            let remaining = seconds;
+            timerElement.textContent = `0:${remaining.toString().padStart(2, '0')}`;
+            
+            const interval = setInterval(() => {
+                remaining--;
+                timerElement.textContent = `0:${remaining.toString().padStart(2, '0')}`;
+                
+                if (remaining <= 0) {
+                    clearInterval(interval);
+                    mineBtn.disabled = false;
+                    timerElement.textContent = 'READY';
+                }
+            }, 1000);
+        }
+        
+        // Claim button
+        document.getElementById('claim-btn').addEventListener('click', function() {
+            this.disabled = true;
+            this.textContent = 'CLAIMED!';
+            
+            // Update balance
+            const currentBalance = parseFloat(document.getElementById('user-balance').textContent.replace(/,/g, ''));
+            const newBalance = currentBalance + 250;
+            document.getElementById('user-balance').textContent = newBalance.toLocaleString(undefined, {maximumFractionDigits: 2});
+            document.getElementById('usd-value').textContent = `$${(newBalance * 0.01).toLocaleString(undefined, {maximumFractionDigits: 2})`;
+            
+            setTimeout(() => {
+                this.textContent = 'COME BACK TOMORROW';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
